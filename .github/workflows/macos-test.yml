@@ -1,0 +1,35 @@
+name: macOS 测试
+
+on:
+  workflow_dispatch:   # 允许手动触发
+  push:               # 每次推送也自动触发
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - name: 查看系统信息
+        run: |
+          sw_vers
+          uname -a
+          echo "=== 当前运行在 macOS 环境 ==="
+
+      - name: 查看 Python 版本
+        run: python3 --version
+
+      - name: 编译并运行 C 程序
+        run: |
+          cat > hello.c << 'EOF'
+          #include <stdio.h>
+          int main() {
+              printf("Hello from macOS runner!\n");
+              return 0;
+          }
+          EOF
+          gcc -o hello hello.c
+          ./hello
+
+      - name: 查看 CPU 架构
+        run: |
+          uname -m
+          sysctl -n machdep.cpu.brand_string
