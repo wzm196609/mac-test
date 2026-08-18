@@ -16,5 +16,3 @@ jobs:
 
       - name: 开启交互式 SSH 会话
         uses: mxschmitt/action-tmate@v3
-        with:
-          limit-access-to-actor: true   # 只允许你自己连接
