@@ -1,0 +1,20 @@
+name: 交互式进入 macOS
+
+on:
+  workflow_dispatch:   # 手动触发
+
+jobs:
+  shell:
+    runs-on: macos-latest
+    timeout-minutes: 360   # 最长 6 小时
+    steps:
+      - name: 查看环境
+        run: |
+          sw_vers
+          uname -a
+          echo "=== macOS 环境已就绪，等待你连接 ==="
+
+      - name: 开启交互式 SSH 会话
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true   # 只允许你自己连接
