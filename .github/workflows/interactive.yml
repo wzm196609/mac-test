@@ -14,5 +14,7 @@ jobs:
           uname -a
           echo "=== macOS 环境已就绪，等待你连接 ==="
 
-      - name: 开启交互式 SSH 会话
-        uses: mxschmitt/action-tmate@v3
+      - name: Setup upterm session
+        uses: owenthereal/action-upterm@v1
+        with:
+          wait-timeout-minutes: 60   # 若 60 分钟内无人连接则自动关闭
